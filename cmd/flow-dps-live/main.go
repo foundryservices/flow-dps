@@ -363,6 +363,8 @@ func run() int {
 		mapper.WithTransition(mapper.StatusIndex, transitions.IndexChain),
 		mapper.WithTransition(mapper.StatusUpdate, transitions.UpdateTree),
 		mapper.WithTransition(mapper.StatusCollect, transitions.CollectRegisters),
+		mapper.WithTransition(mapper.StatusFindFlow, transitions.FindFlow),
+		mapper.WithTransition(mapper.StatusBalanceFlow, transitions.BalanceFlow),
 		mapper.WithTransition(mapper.StatusMap, transitions.MapRegisters),
 		mapper.WithTransition(mapper.StatusForward, transitions.ForwardHeight),
 	)
