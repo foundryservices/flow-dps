@@ -16,7 +16,7 @@ require (
 	github.com/klauspost/compress v1.13.5
 	github.com/onflow/cadence v0.19.1
 	github.com/onflow/flow-go v0.22.9-patch-1-epoch-view-check-hotfix-consensus-follower-fixes
-	github.com/onflow/flow-go-sdk v0.22.0
+	github.com/onflow/flow-go-sdk v0.23.0
 	github.com/onflow/flow-go/crypto v0.22.10
 	github.com/prometheus/client_golang v1.10.0
 	github.com/prometheus/tsdb v0.7.1
