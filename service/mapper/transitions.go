@@ -17,7 +17,6 @@ package mapper
 import (
 	"errors"
 	"fmt"
-	"github.com/dapperlabs/flow-dps/service/balance"
 	"sync"
 	"time"
 
@@ -370,7 +369,7 @@ func (t *Transitions) UpdateTree(s *State) error {
 	// forest, and save the updated tree in the forest. If the tree is not new,
 	// we should error, as that should not happen.
 	paths, payloads := pathsPayloads(update)
-	tree, err = trie.NewTrieWithUpdatedRegisters(tree, paths, payloads)
+	tree, err = trie.NewTrieWithUpdatedRegisters(tree, paths, payloads, true)
 	if err != nil {
 		return fmt.Errorf("could not update tree: %w", err)
 	}
@@ -473,12 +472,12 @@ func (t *Transitions) FindFlow(s *State) error {
 
 	tStart := time.Now()
 
-	for path, payload := range s.registers {
-		err := balance.DetectFlow(path, payload, flows)
-		if err != nil {
-			return fmt.Errorf("cannot detect flow in payload under %s", payload.Key.String())
-		}
-	}
+	//for path, payload := range s.registers {
+	//	err := balance.DetectFlow(path, payload, flows)
+	//	if err != nil {
+	//		return fmt.Errorf("cannot detect flow in payload under %s", payload.Key.String())
+	//	}
+	//}
 
 	s.flows = flows
 

@@ -1205,6 +1205,7 @@ func baselineFSM(t *testing.T, status Status, opts ...func(tr *Transitions)) (*T
 		cfg: Config{
 			BootstrapState: false,
 			SkipRegisters:  false,
+			SkipFlow:       true,
 			WaitInterval:   0,
 		},
 		log:   mocks.NoopLogger,

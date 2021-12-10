@@ -19,6 +19,7 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/onflow/flow-go/model/flow"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
@@ -85,7 +86,7 @@ func TestProtocolState(t *testing.T) {
 		db := helpers.InMemoryDB(t)
 		defer db.Close()
 
-		data, err := json.Marshal(&inmem.EncodableSnapshot{})
+		data, err := json.Marshal(&inmem.EncodableSnapshot{SealingSegment: &flow.SealingSegment{}})
 		require.NoError(t, err)
 
 		reader := bytes.NewBuffer(data)

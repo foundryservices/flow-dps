@@ -83,6 +83,7 @@ func run() int {
 		flagLevel      string
 		flagMetrics    string
 		flagSkip       bool
+		//flagSkipFlow   bool
 
 		flagFlushInterval time.Duration
 		flagSeedAddress   string
@@ -98,6 +99,7 @@ func run() int {
 	pflag.StringVarP(&flagLevel, "level", "l", "info", "log output level")
 	pflag.StringVarP(&flagMetrics, "metrics", "m", "", "address on which to expose metrics (no metrics are exposed when left empty)")
 	pflag.BoolVarP(&flagSkip, "skip", "s", false, "skip indexing of execution state ledger registers")
+	//pflag.BoolVarP(&flagSkipFlow, "skip-flow", "f", false, "skip detecting and indexing registers containing Flow vaults")
 
 	pflag.DurationVar(&flagFlushInterval, "flush-interval", 1*time.Second, "interval for flushing badger transactions (0s for disabled)")
 	pflag.StringVar(&flagSeedAddress, "seed-address", "", "host address of seed node to follow consensus")
@@ -353,6 +355,7 @@ func run() int {
 	transitions := mapper.NewTransitions(log, load, consensus, execution, read, writer,
 		mapper.WithBootstrapState(empty),
 		mapper.WithSkipRegisters(flagSkip),
+		mapper.WithSkipFlow(false),
 	)
 	forest := forest.New()
 	state := mapper.EmptyState(forest)
@@ -363,8 +366,8 @@ func run() int {
 		mapper.WithTransition(mapper.StatusIndex, transitions.IndexChain),
 		mapper.WithTransition(mapper.StatusUpdate, transitions.UpdateTree),
 		mapper.WithTransition(mapper.StatusCollect, transitions.CollectRegisters),
-		mapper.WithTransition(mapper.StatusFindFlow, transitions.FindFlow),
-		mapper.WithTransition(mapper.StatusBalanceFlow, transitions.BalanceFlow),
+		//mapper.WithTransition(mapper.StatusFindFlow, transitions.FindFlow),
+		//mapper.WithTransition(mapper.StatusBalanceFlow, transitions.BalanceFlow),
 		mapper.WithTransition(mapper.StatusMap, transitions.MapRegisters),
 		mapper.WithTransition(mapper.StatusForward, transitions.ForwardHeight),
 	)
