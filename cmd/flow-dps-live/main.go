@@ -355,7 +355,7 @@ func run() int {
 	transitions := mapper.NewTransitions(log, load, consensus, execution, read, writer,
 		mapper.WithBootstrapState(empty),
 		mapper.WithSkipRegisters(flagSkip),
-		mapper.WithSkipFlow(false),
+		mapper.WithSkipFlow(true),
 	)
 	forest := forest.New()
 	state := mapper.EmptyState(forest)
