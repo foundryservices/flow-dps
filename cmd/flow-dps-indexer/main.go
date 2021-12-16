@@ -60,7 +60,6 @@ func run() int {
 		flagLevel         string
 		flagTrie          string
 		flagSkipRegisters bool
-		flagSkipFlow      bool
 	)
 
 	pflag.StringVarP(&flagCheckpoint, "checkpoint", "c", "", "path to root checkpoint file for execution state trie")
@@ -69,7 +68,6 @@ func run() int {
 	pflag.StringVarP(&flagLevel, "level", "l", "info", "log output level")
 	pflag.StringVarP(&flagTrie, "trie", "t", "", "path to data directory for execution state ledger")
 	pflag.BoolVarP(&flagSkipRegisters, "skip-registers", "r", false, "skip indexing of execution state ledger registers")
-	pflag.BoolVarP(&flagSkipFlow, "skip-flow", "f", false, "skip detecting and indexin registers containing Flow vaults")
 
 	pflag.Parse()
 
@@ -183,7 +181,6 @@ func run() int {
 	transitions := mapper.NewTransitions(log, load, disk, feed, read, write,
 		mapper.WithBootstrapState(bootstrap),
 		mapper.WithSkipRegisters(flagSkipRegisters),
-		mapper.WithSkipFlow(flagSkipFlow),
 	)
 	forest := forest.New()
 	state := mapper.EmptyState(forest)
@@ -194,8 +191,6 @@ func run() int {
 		mapper.WithTransition(mapper.StatusIndex, transitions.IndexChain),
 		mapper.WithTransition(mapper.StatusUpdate, transitions.UpdateTree),
 		mapper.WithTransition(mapper.StatusCollect, transitions.CollectRegisters),
-		mapper.WithTransition(mapper.StatusFindFlow, transitions.FindFlow),
-		mapper.WithTransition(mapper.StatusBalanceFlow, transitions.BalanceFlow),
 		mapper.WithTransition(mapper.StatusMap, transitions.MapRegisters),
 		mapper.WithTransition(mapper.StatusForward, transitions.ForwardHeight),
 	)

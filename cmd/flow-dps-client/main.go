@@ -16,12 +16,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/onflow/flow-go/model/flow"
 	"math"
 	"os"
 	"os/signal"
 	"strings"
 	"time"
+
+	"github.com/onflow/flow-go/model/flow"
 
 	"github.com/rs/zerolog"
 	"github.com/spf13/pflag"
@@ -51,13 +52,14 @@ func run() int {
 
 	// Command line parameter initialization.
 	var (
-		flagAPI      string
-		flagCache    uint64
-		flagHeight   uint64
-		flagLevel    string
-		flagParams   string
-		flagScript   string
-		flagGasLimit uint64
+		flagAPI        string
+		flagCache      uint64
+		flagHeight     uint64
+		flagLevel      string
+		flagParams     string
+		flagScript     string
+		flagGasLimit   uint64
+		flgaDebugIndex bool
 	)
 
 	pflag.StringVarP(&flagAPI, "api", "a", "", "host for GRPC API server")
@@ -67,6 +69,7 @@ func run() int {
 	pflag.StringVarP(&flagParams, "params", "p", "", "comma-separated list of Cadence parameters")
 	pflag.StringVarP(&flagScript, "script", "s", "script.cdc", "path to file with Cadence script")
 	pflag.Uint64VarP(&flagGasLimit, "gas-limit", "g", math.MaxUint64, "gas limit for script execution")
+	pflag.BoolVarP(&flgaDebugIndex, "debug-index", "d", false, "display index information")
 
 	pflag.Parse()
 

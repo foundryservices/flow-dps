@@ -389,10 +389,10 @@ func (t *Transitions) CollectRegisters(s *State) error {
 		return fmt.Errorf("invalid status for collecting registers (%s)", s.status)
 	}
 
-	// If both indexing payloads and Flow is disabled, we can bypass collection and indexing
+	// If indexing payloads and Flow is disabled, we can bypass collection and indexing
 	// of payloads and just go straight to forwarding the height to the next
 	// finalized block.
-	if t.cfg.SkipRegisters && t.cfg.SkipFlow {
+	if t.cfg.SkipRegisters {
 		s.status = StatusForward
 		return nil
 	}
@@ -450,91 +450,7 @@ func (t *Transitions) CollectRegisters(s *State) error {
 
 	// At this point, we have collected all the payloads, so we go to the next
 	// step, where we will index them.
-	if !t.cfg.SkipFlow {
-		s.status = StatusFindFlow
-	} else {
-		s.status = StatusMap
-	}
-
-	return nil
-}
-
-// FindFlow inspects registers to be updated and find FLOW vaults inside
-func (t *Transitions) FindFlow(s *State) error {
-	log := t.log.With().Uint64("height", s.height).Logger()
-	if s.status != StatusFindFlow {
-		return fmt.Errorf("invalid status for collecting registers (%s)", s.status)
-	}
-
-	log.Debug().Msgf("About to find FLOW in %d registers", len(s.registers))
-
-	flows := make(map[flow.Address]map[ledger.Path]uint64)
-
-	tStart := time.Now()
-
-	//for path, payload := range s.registers {
-	//	err := balance.DetectFlow(path, payload, flows)
-	//	if err != nil {
-	//		return fmt.Errorf("cannot detect flow in payload under %s", payload.Key.String())
-	//	}
-	//}
-
-	s.flows = flows
-
-	tDur := time.Since(tStart)
-
-	log.Info().Int("registers", len(flows)).Dur("elapsed", tDur).Msg("inspected all registers for FLOW for finalized block")
-
-	s.status = StatusBalanceFlow
-	return nil
-}
-
-// BalanceFlow find previous Flow vaults and updates them
-func (t *Transitions) BalanceFlow(s *State) error {
-	log := t.log.With().Uint64("height", s.height).Logger()
-	if s.status != StatusBalanceFlow {
-		return fmt.Errorf("invalid status for balancing flow (%s)", s.status)
-	}
-
-	log.Debug().Msgf("About to balance FLOW for %d accounts", len(s.flows))
-
-	if len(s.flows) == 0 {
-		log.Debug().Msg("All flow balanced")
-		if t.cfg.SkipRegisters {
-			s.status = StatusForward
-		} else {
-			s.status = StatusMap
-		}
-		s.registers = make(map[ledger.Path]*ledger.Payload, 0)
-		return nil
-	}
-
-	tStart := time.Now()
-
-	n := 0
-	batchMax := 1000
-
-	for address, updatedRegisters := range s.flows {
-
-		if len(updatedRegisters) > 0 {
-			err := t.write.FlowRegisters(address, s.height, updatedRegisters)
-			if err != nil {
-				return fmt.Errorf("cannot write flow registers for account %x", address)
-			}
-		}
-		n++
-
-		delete(s.flows, address)
-
-		if n >= batchMax {
-			log.Debug().Dur("elapsed", time.Since(tStart)).Msgf("Balanced flow for %d accounts", n)
-			break
-		}
-	}
-
-	tDur := time.Since(tStart)
-
-	log.Info().Int("remaining", len(s.flows)).Dur("elapsed", tDur).Msgf("balanced %d Flow vaults for finalized block", n)
+	s.status = StatusMap
 
 	return nil
 }
