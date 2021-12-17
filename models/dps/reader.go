@@ -41,6 +41,4 @@ type Reader interface {
 	CollectionsByHeight(height uint64) ([]flow.Identifier, error)
 	TransactionsByHeight(height uint64) ([]flow.Identifier, error)
 	SealsByHeight(height uint64) ([]flow.Identifier, error)
-
-	FlowRegisters(address flow.Address, height uint64) (map[ledger.Path]uint64, error)
 }

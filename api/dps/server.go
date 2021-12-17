@@ -16,8 +16,8 @@ package dps
 
 import (
 	"context"
-	"encoding/hex"
 	"fmt"
+
 	"github.com/go-playground/validator/v10"
 
 	"github.com/onflow/flow-go/model/flow"
@@ -439,37 +439,6 @@ func (s *Server) ListSealsForHeight(_ context.Context, req *ListSealsForHeightRe
 	res := ListSealsForHeightResponse{
 		Height:  req.Height,
 		SealIDs: sIDs,
-	}
-
-	return &res, nil
-}
-
-func (s *Server) GetFlowRegisters(_ context.Context, req *GetFlowRegistersRequest) (*GetFlowRegistersResponse, error) {
-	err := s.validate.Struct(req)
-	if err != nil {
-		return nil, fmt.Errorf("bad request: %w", err)
-	}
-
-	address := flow.BytesToAddress(req.Address)
-
-	fmt.Printf("GetFlowRegisters for %s\n", address.String())
-
-	flowRegisters, err := s.index.FlowRegisters(address, req.Height)
-	if err != nil {
-		return nil, fmt.Errorf("could not get flow registes: %w", err)
-	}
-
-	registers := make(map[string]uint64, len(flowRegisters))
-
-	for path, balance := range flowRegisters {
-		encodedPath := hex.EncodeToString(path[:])
-		registers[encodedPath] = balance
-	}
-
-	res := GetFlowRegistersResponse{
-		Address:   req.Address,
-		Height:    req.Height,
-		Registers: registers,
 	}
 
 	return &res, nil
