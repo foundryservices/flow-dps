@@ -34,7 +34,6 @@ type APIClient interface {
 	GetResult(ctx context.Context, in *GetResultRequest, opts ...grpc.CallOption) (*GetResultResponse, error)
 	GetSeal(ctx context.Context, in *GetSealRequest, opts ...grpc.CallOption) (*GetSealResponse, error)
 	ListSealsForHeight(ctx context.Context, in *ListSealsForHeightRequest, opts ...grpc.CallOption) (*ListSealsForHeightResponse, error)
-	GetFlowRegisters(ctx context.Context, in *GetFlowRegistersRequest, opts ...grpc.CallOption) (*GetFlowRegistersResponse, error)
 }
 
 type aPIClient struct {
@@ -189,15 +188,6 @@ func (c *aPIClient) ListSealsForHeight(ctx context.Context, in *ListSealsForHeig
 	return out, nil
 }
 
-func (c *aPIClient) GetFlowRegisters(ctx context.Context, in *GetFlowRegistersRequest, opts ...grpc.CallOption) (*GetFlowRegistersResponse, error) {
-	out := new(GetFlowRegistersResponse)
-	err := c.cc.Invoke(ctx, "/API/GetFlowRegisters", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // APIServer is the server API for API service.
 // All implementations should embed UnimplementedAPIServer
 // for forward compatibility
@@ -218,7 +208,6 @@ type APIServer interface {
 	GetResult(context.Context, *GetResultRequest) (*GetResultResponse, error)
 	GetSeal(context.Context, *GetSealRequest) (*GetSealResponse, error)
 	ListSealsForHeight(context.Context, *ListSealsForHeightRequest) (*ListSealsForHeightResponse, error)
-	GetFlowRegisters(context.Context, *GetFlowRegistersRequest) (*GetFlowRegistersResponse, error)
 }
 
 // UnimplementedAPIServer should be embedded to have forward compatible implementations.
@@ -272,9 +261,6 @@ func (UnimplementedAPIServer) GetSeal(context.Context, *GetSealRequest) (*GetSea
 }
 func (UnimplementedAPIServer) ListSealsForHeight(context.Context, *ListSealsForHeightRequest) (*ListSealsForHeightResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSealsForHeight not implemented")
-}
-func (UnimplementedAPIServer) GetFlowRegisters(context.Context, *GetFlowRegistersRequest) (*GetFlowRegistersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFlowRegisters not implemented")
 }
 
 // UnsafeAPIServer may be embedded to opt out of forward compatibility for this service.
@@ -576,24 +562,6 @@ func _API_ListSealsForHeight_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _API_GetFlowRegisters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFlowRegistersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(APIServer).GetFlowRegisters(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/API/GetFlowRegisters",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(APIServer).GetFlowRegisters(ctx, req.(*GetFlowRegistersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // API_ServiceDesc is the grpc.ServiceDesc for API service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -664,10 +632,6 @@ var API_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSealsForHeight",
 			Handler:    _API_ListSealsForHeight_Handler,
-		},
-		{
-			MethodName: "GetFlowRegisters",
-			Handler:    _API_GetFlowRegisters_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

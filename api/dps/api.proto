@@ -35,7 +35,6 @@ service API {
   rpc GetResult (GetResultRequest) returns (GetResultResponse) {}
   rpc GetSeal(GetSealRequest) returns (GetSealResponse) {}
   rpc ListSealsForHeight(ListSealsForHeightRequest) returns (ListSealsForHeightResponse) {}
-  rpc GetFlowRegisters (GetFlowRegistersRequest) returns (GetFlowRegistersResponse) {}
 }
 
 message GetFirstRequest {
@@ -180,15 +179,4 @@ message ListSealsForHeightRequest {
 message ListSealsForHeightResponse {
   uint64 height = 1;
   repeated bytes sealIDs = 2;
-}
-
-message GetFlowRegistersRequest {
-  bytes address = 1;
-  uint64 height = 2;
-}
-
-message GetFlowRegistersResponse {
-  bytes address = 1;
-  uint64 height = 2;
-  map<string, uint64> registers = 3;
 }
