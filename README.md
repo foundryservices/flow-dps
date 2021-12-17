@@ -31,6 +31,15 @@ Below are links to the individual documentation for the binaries within this rep
 * [`flow-dps-live`](./cmd/flow-dps-live/README.md)
 * [`flow-dps-server`](./cmd/flow-dps-server/README.md)
 
+### Docker
+
+A simple Dockerfile can be used to easily build a docker image with a selected binary. Use build argument `BINARY` with 
+value equal to directory name from `cmd/` folder to build appropriate binary into an image.
+
+### Scripts
+
+`scripts/` folder contains examples how to run DPS for given network, prepare and download the appropriate data
+
 ### APIs
 
 The DPS API gives access to historical data at any given height.
