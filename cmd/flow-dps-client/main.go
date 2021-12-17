@@ -22,8 +22,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/onflow/flow-go/model/flow"
-
+	"github.com/dapperlabs/flow-dps/service/invoker"
+	"github.com/onflow/cadence/encoding/json"
 	"github.com/rs/zerolog"
 	"github.com/spf13/pflag"
 	"google.golang.org/grpc"
@@ -59,7 +59,7 @@ func run() int {
 		flagParams     string
 		flagScript     string
 		flagGasLimit   uint64
-		flgaDebugIndex bool
+		flagDebugIndex bool
 	)
 
 	pflag.StringVarP(&flagAPI, "api", "a", "", "host for GRPC API server")
@@ -69,7 +69,7 @@ func run() int {
 	pflag.StringVarP(&flagParams, "params", "p", "", "comma-separated list of Cadence parameters")
 	pflag.StringVarP(&flagScript, "script", "s", "script.cdc", "path to file with Cadence script")
 	pflag.Uint64VarP(&flagGasLimit, "gas-limit", "g", math.MaxUint64, "gas limit for script execution")
-	pflag.BoolVarP(&flgaDebugIndex, "debug-index", "d", false, "display index information")
+	pflag.BoolVarP(&flagDebugIndex, "debug-index", "d", false, "display index information")
 
 	pflag.Parse()
 
@@ -106,12 +106,34 @@ func run() int {
 	}
 	defer conn.Close()
 
-	//// Read the script.
-	//script, err := os.ReadFile(flagScript)
-	//if err != nil {
-	//	log.Error().Str("script", flagScript).Err(err).Msg("could not read script")
-	//	return failure
-	//}
+	// Initialize codec.
+	codec := zbor.NewCodec()
+
+	// Execute the script using remote lookup and read.
+	client := dps.NewAPIClient(conn)
+
+	index := dps.IndexFromAPI(client, codec)
+
+	if flagDebugIndex {
+		first, err := index.First()
+		if err != nil {
+			log.Error().Err(err).Msg("could not get index debug data")
+			return failure
+		}
+		last, err := index.Last()
+		if err != nil {
+			log.Error().Err(err).Msg("could not get index debug data")
+			return failure
+		}
+		fmt.Printf("Index first: %d\nIndex last: %d\n", first, last)
+	}
+
+	// Read the script.
+	script, err := os.ReadFile(flagScript)
+	if err != nil {
+		log.Error().Str("script", flagScript).Err(err).Msg("could not read script")
+		return failure
+	}
 
 	// Decode the arguments
 	var args []cadence.Value
@@ -127,45 +149,23 @@ func run() int {
 		}
 	}
 
-	// Initialize codec.
-	codec := zbor.NewCodec()
-
-	// Execute the script using remote lookup and read.
-	client := dps.NewAPIClient(conn)
-
-	index := dps.IndexFromAPI(client, codec)
-
-	// staking account
-	flowRegisters, err := index.FlowRegisters(flow.HexToAddress("8624b52f9ddcd04a"), flagHeight)
+	invoke, err := invoker.New(index, invoker.WithCacheSize(flagCache), invoker.WithGasLimit(flagGasLimit))
 	if err != nil {
-		log.Error().Err(err).Msg("could not get registers")
+		log.Error().Err(err).Msg("could not initialize invoker")
 		return failure
 	}
-	total := uint64(0)
-	for path, balance := range flowRegisters {
-		fmt.Printf("%x => %d\n", path[:], balance)
-		total += balance
+	result, err := invoke.Script(flagHeight, script, args)
+	if err != nil {
+		log.Error().Err(err).Msg("could not invoke script")
+		return failure
+	}
+	output, err := json.Encode(result)
+	if err != nil {
+		log.Error().Uint64("height", flagHeight).Err(err).Msg("could not encode result")
+		return failure
 	}
 
-	fmt.Printf("got %d registers with total value of %d\n", len(flowRegisters), total)
-
-	//invoke, err := invoker.New(index, invoker.WithCacheSize(flagCache), invoker.WithGasLimit(flagGasLimit))
-	//if err != nil {
-	//	log.Error().Err(err).Msg("could not initialize invoker")
-	//	return failure
-	//}
-	//result, err := invoke.Script(flagHeight, script, args)
-	//if err != nil {
-	//	log.Error().Err(err).Msg("could not invoke script")
-	//	return failure
-	//}
-	//output, err := json.Encode(result)
-	//if err != nil {
-	//	log.Error().Uint64("height", flagHeight).Err(err).Msg("could not encode result")
-	//	return failure
-	//}
-	//
-	//fmt.Println(string(output))
+	fmt.Println(string(output))
 
 	return success
 }
