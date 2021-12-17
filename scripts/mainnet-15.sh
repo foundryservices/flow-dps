@@ -6,6 +6,7 @@ live_data "/var/flow" "mainnet-15"  "https://storage.googleapis.com/flow-genesis
 # dir where data has been downloaded should be mounted
 docker run \
   -v /var/flow:/data/ \
+  -p 5005:5005 \
   flow-dps-live:v0.23 \
   -a 0.0.0.0:5005 \
   -i /data/mainnet-15/index \

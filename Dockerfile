@@ -57,4 +57,4 @@ COPY --from=build-binary /app /app
 
 EXPOSE 5005
 
-CMD ["/app"]
+ENTRYPOINT ["/app"]
