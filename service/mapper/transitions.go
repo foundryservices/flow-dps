@@ -369,7 +369,7 @@ func (t *Transitions) UpdateTree(s *State) error {
 	// forest, and save the updated tree in the forest. If the tree is not new,
 	// we should error, as that should not happen.
 	paths, payloads := pathsPayloads(update)
-	tree, err = trie.NewTrieWithUpdatedRegisters(tree, paths, payloads, true)
+	tree, err = trie.NewTrieWithUpdatedRegisters(tree, paths, payloads, false)
 	if err != nil {
 		return fmt.Errorf("could not update tree: %w", err)
 	}

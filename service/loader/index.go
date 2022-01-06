@@ -68,7 +68,7 @@ func (i *Index) Trie() (*trie.MTrie, error) {
 	processed := 0
 	process := func(path ledger.Path, payload *ledger.Payload) error {
 		var err error
-		tree, err = trie.NewTrieWithUpdatedRegisters(tree, []ledger.Path{path}, []ledger.Payload{*payload}, true)
+		tree, err = trie.NewTrieWithUpdatedRegisters(tree, []ledger.Path{path}, []ledger.Payload{*payload}, false)
 		if err != nil {
 			return fmt.Errorf("could not update trie: %w", err)
 		}
