@@ -178,7 +178,7 @@ func (t *Transitions) ResumeIndexing(s *State) error {
 		return fmt.Errorf("could not get last commit: %w", err)
 	}
 	if hash != commit {
-		return fmt.Errorf("restored trie hash does not match last commit (hash: %x, commit: %x)", hash, commit)
+		return fmt.Errorf("restored trie hash does not match last commit (hash: %x, commit: %x, height: %d)", hash, commit, last)
 	}
 
 	// At this point, we can store the restored trie in our forest, as the trie
