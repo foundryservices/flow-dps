@@ -30,7 +30,6 @@ type State struct {
 	next      flow.StateCommitment
 	registers map[ledger.Path]*ledger.Payload
 	done      chan struct{}
-	flows     map[flow.Address]map[ledger.Path]uint64
 }
 
 // EmptyState returns a new empty state that uses the given forest.

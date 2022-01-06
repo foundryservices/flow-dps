@@ -46,7 +46,6 @@ type ReadLibrary interface {
 	LookupTransactionsForCollection(collID flow.Identifier, txIDs *[]flow.Identifier) func(*badger.Txn) error
 	LookupCollectionsForHeight(height uint64, collIDs *[]flow.Identifier) func(*badger.Txn) error
 	LookupSealsForHeight(height uint64, sealIDs *[]flow.Identifier) func(*badger.Txn) error
-	LookupFlowRegistersForHeight(address flow.Address, height uint64, flowRegisters *map[ledger.Path]uint64) func(*badger.Txn) error
 
 	RetrieveCollection(collID flow.Identifier, collection *flow.LightCollection) func(*badger.Txn) error
 	RetrieveGuarantee(collID flow.Identifier, collection *flow.CollectionGuarantee) func(*badger.Txn) error
@@ -75,7 +74,6 @@ type WriteLibrary interface {
 	IndexTransactionsForCollection(collID flow.Identifier, txIDs []flow.Identifier) func(*badger.Txn) error
 	IndexCollectionsForHeight(height uint64, collIDs []flow.Identifier) func(*badger.Txn) error
 	IndexSealsForHeight(height uint64, sealIDs []flow.Identifier) func(*badger.Txn) error
-	IndexFlowRegistersForHeight(address flow.Address, height uint64, flowRegisters map[ledger.Path]uint64) func(*badger.Txn) error
 
 	SaveCollection(collection *flow.LightCollection) func(*badger.Txn) error
 	SaveGuarantee(guarantee *flow.CollectionGuarantee) func(*badger.Txn) error

@@ -160,7 +160,3 @@ func (r *Reader) Seal(sealID flow.Identifier) (*flow.Seal, error) {
 func (r *Reader) SealsByHeight(height uint64) ([]flow.Identifier, error) {
 	return r.SealsByHeightFunc(height)
 }
-
-func (r *Reader) FlowRegisters(address flow.Address, height uint64) (map[ledger.Path]uint64, error) {
-	return nil, nil
-}

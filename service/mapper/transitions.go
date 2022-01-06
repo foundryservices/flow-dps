@@ -389,7 +389,7 @@ func (t *Transitions) CollectRegisters(s *State) error {
 		return fmt.Errorf("invalid status for collecting registers (%s)", s.status)
 	}
 
-	// If indexing payloads and Flow is disabled, we can bypass collection and indexing
+	// If indexing payloads is disabled, we can bypass collection and indexing
 	// of payloads and just go straight to forwarding the height to the next
 	// finalized block.
 	if t.cfg.SkipRegisters {

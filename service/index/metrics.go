@@ -140,7 +140,3 @@ func (w *MetricsWriter) Guarantees(height uint64, guarantees []*flow.CollectionG
 func (w *MetricsWriter) Results(results []*flow.TransactionResult) error {
 	return w.write.Results(results)
 }
-
-func (w *MetricsWriter) FlowRegisters(address flow.Address, height uint64, flowRegisters map[ledger.Path]uint64) error {
-	return w.write.FlowRegisters(address, height, flowRegisters)
-}

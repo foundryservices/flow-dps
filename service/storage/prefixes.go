@@ -37,6 +37,4 @@ const (
 
 	PrefixSeal           = 14
 	PrefixSealsForHeight = 15
-
-	PrefixFlowRegisters = 18
 )

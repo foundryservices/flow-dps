@@ -133,10 +133,6 @@ func (w *Writer) Seals(height uint64, seals []*flow.Seal) error {
 	return w.SealsFunc(height, seals)
 }
 
-func (w *Writer) FlowRegisters(address flow.Address, height uint64, flowRegisters map[ledger.Path]uint64) error {
-	return nil
-}
-
 func (w *Writer) Close() error {
 	return w.Close()
 }

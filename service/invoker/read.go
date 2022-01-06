@@ -41,7 +41,6 @@ func readRegister(index dps.Reader, cache Cache, height uint64) delta.GetRegiste
 		if err != nil {
 			return nil, fmt.Errorf("could not convert key to path: %w", err)
 		}
-		fmt.Printf("%x/%x/%s => %x\n", owner, controller, key, path[:])
 
 		values, err := index.Values(height, []ledger.Path{path})
 		if err != nil {

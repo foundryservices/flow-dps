@@ -221,10 +221,6 @@ func (w *Writer) Seals(height uint64, seals []*flow.Seal) error {
 	return w.apply(ops...)
 }
 
-func (w *Writer) FlowRegisters(address flow.Address, height uint64, flowRegisters map[ledger.Path]uint64) error {
-	return w.apply(w.lib.IndexFlowRegistersForHeight(address, height, flowRegisters))
-}
-
 func (w *Writer) apply(ops ...func(*badger.Txn) error) error {
 
 	// Before applying an additional operation to the transaction we are
