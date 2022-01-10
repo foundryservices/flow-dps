@@ -161,6 +161,12 @@ func run() int {
 		log.Error().Err(err).Msg("could not get first height from index reader")
 		return failure
 	}
+	last, err := read.Last()
+	if err != nil && !errors.Is(err, badger.ErrKeyNotFound) {
+		log.Error().Err(err).Msg("could not get last height from index reader")
+		return failure
+	}
+
 	empty := errors.Is(err, badger.ErrKeyNotFound)
 	if empty && flagCheckpoint == "" {
 		log.Error().Msg("index database is empty, please provide root checkpoint (-c, --checkpoint) to bootstrap")
@@ -336,7 +342,7 @@ func run() int {
 		initialize := loader.FromCheckpoint(file)
 		load = loader.FromIndex(log, storage, indexDB,
 			loader.WithInitializer(initialize),
-			loader.WithExclude(loader.ExcludeAtOrBelow(first)),
+			loader.WithExclude(loader.ExcludeOutside(first, last)),
 		)
 	}
 
