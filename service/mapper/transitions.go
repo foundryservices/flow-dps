@@ -181,7 +181,7 @@ func (t *Transitions) ResumeIndexing(s *State) error {
 	}
 	if hash != commit {
 
-		filename := fmt.Sprintf("%x.trie.jsonl", hash)
+		filename := fmt.Sprintf("/data/%x.trie.jsonl", hash)
 
 		fi, err := os.Create(filename)
 		if err != nil {
