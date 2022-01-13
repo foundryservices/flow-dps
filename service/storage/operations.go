@@ -287,8 +287,8 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 		it := tx.NewIterator(opts)
 		defer it.Close()
 
-		payloads := make([]*ledger.Payload, 0, 1000)
-		paths := make([]ledger.Path, 0, 1000)
+		payloads := make([]*ledger.Payload, 0, 10000)
+		paths := make([]ledger.Path, 0, 10000)
 
 		sentinel := EncodeKey(PrefixPayload, highest, uint64(math.MaxUint64))
 		for it.Seek(sentinel); it.ValidForPrefix(prefix); {
