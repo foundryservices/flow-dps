@@ -264,7 +264,7 @@ func (l *Library) RetrieveResult(txID flow.Identifier, result *flow.TransactionR
 
 // IterateLedger steps through the entire ledger for ledger keys and payloads
 // and call the given callback for each of them.
-func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(path ledger.Path, payload *ledger.Payload) error) func(*badger.Txn) error {
+func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(paths []ledger.Path, payloads []*ledger.Payload) error) func(*badger.Txn) error {
 
 	prefix := EncodeKey(PrefixPayload)
 	opts := badger.IteratorOptions{
@@ -286,6 +286,9 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 
 		it := tx.NewIterator(opts)
 		defer it.Close()
+
+		payloads := make([]*ledger.Payload, 0, 1000)
+		paths := make([]ledger.Path, 0, 1000)
 
 		sentinel := EncodeKey(PrefixPayload, highest, uint64(math.MaxUint64))
 		for it.Seek(sentinel); it.ValidForPrefix(prefix); {
@@ -316,13 +319,20 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 				return fmt.Errorf("could not decode value (path: %x): %w", path, err)
 			}
 
-			// Then, we process the ledger path and payload with the callback.
-			err = process(path, &payload)
-			if err != nil {
-				return fmt.Errorf("could not process register (path: %x): %w", path, err)
+			payloads = append(payloads, &payload)
+			paths = append(paths, path)
+
+			if len(payloads) == cap(payloads)-1 {
+				// Then, we process the ledger path and payload with the callback.
+				err = process(paths, payloads)
+				if err != nil {
+					return fmt.Errorf("could not process register (path: %x): %w", path, err)
+				}
+				payloads = payloads[:0]
+				paths = paths[:0]
 			}
 
-			// We need want to go to the first value that is below the current
+			// We want to go to the first value that is below the current
 			// path. In order to cover all potential cases, including payloads
 			// at height zero, we need to decrement the current path by one and
 			// use the maximum possible height. If the decrement doesn't work,
@@ -340,6 +350,14 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 			}
 			sentinel = EncodeKey(PrefixPayload, path, uint64(math.MaxUint64))
 			it.Seek(sentinel)
+		}
+
+		// If there are any leftover paths
+		if len(payloads) > 0 {
+			err := process(paths, payloads)
+			if err != nil {
+				return fmt.Errorf("could not process register (path: %x): %w", paths, err)
+			}
 		}
 
 		return nil

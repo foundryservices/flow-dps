@@ -83,9 +83,9 @@ func ExcludeAtOrBelow(threshold uint64) Exclude {
 
 func ExcludeOutside(lower, upper uint64) Exclude {
 	return func(height uint64) bool {
-		if height <= lower || height >= upper {
+		if height < lower || height > upper {
 			fmt.Printf("excluding %d lower %d upper %d \n", height, lower, upper)
 		}
-		return height <= lower || height >= upper
+		return height < lower || height > upper
 	}
 }
