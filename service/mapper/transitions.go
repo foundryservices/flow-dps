@@ -451,9 +451,8 @@ func (t *Transitions) CollectRegisters(s *State) error {
 			}
 			payloads := tree.UnsafeRead([]ledger.Path{path})
 			payload := payloads[0]
-			if len(payload.Value) > 0 {
-				s.registers[path] = payload
-			} else {
+			s.registers[path] = payload
+			if len(payload.Value) == 0 {
 				emptyRegisters++
 			}
 		}
