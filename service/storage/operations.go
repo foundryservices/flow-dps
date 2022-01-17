@@ -323,7 +323,7 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 			payloads = append(payloads, &payload)
 			paths = append(paths, path)
 
-			if len(payloads) >= cap(payloads)-1 {
+			if len(payloads) >= cap(payloads) {
 				// Then, we process the ledger path and payload with the callback.
 				err = process(paths, payloads)
 				if err != nil {

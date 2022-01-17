@@ -16,6 +16,7 @@ package loader
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/dgraph-io/badger/v2"
 	"github.com/rs/zerolog"
@@ -59,13 +60,14 @@ func FromIndex(log zerolog.Logger, lib dps.ReadLibrary, db *badger.DB, options .
 // when indexing was stopped.
 func (i *Index) Trie() (*trie.MTrie, error) {
 
+	i.log.Info().Msg("trie restoring started")
+	start := time.Now()
+
 	// Load the starting trie.
 	tree, err := i.cfg.TrieInitializer.Trie()
 	if err != nil {
 		return nil, fmt.Errorf("could not initialize trie: %w", err)
 	}
-
-	i.log.Debug().Msg("starting trie restoration process")
 
 	processed := 0
 	process := func(paths []ledger.Path, payloads []*ledger.Payload) error {
@@ -81,8 +83,9 @@ func (i *Index) Trie() (*trie.MTrie, error) {
 			return fmt.Errorf("could not update trie: %w", err)
 		}
 		processed += len(paths)
-		if processed%10000 == 0 {
+		if processed >= 10000 {
 			i.log.Debug().Int("processed", processed).Msg("processing registers for trie restoration")
+			processed = 0
 		}
 		return nil
 	}
@@ -91,6 +94,8 @@ func (i *Index) Trie() (*trie.MTrie, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not iterate ledger: %w", err)
 	}
+
+	i.log.Info().Dur("duration", time.Since(start)).Msg("tried restoring finished")
 
 	return tree, nil
 }

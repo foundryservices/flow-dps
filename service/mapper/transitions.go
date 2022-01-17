@@ -212,6 +212,8 @@ func (t *Transitions) ResumeIndexing(s *State) error {
 	// commitments accordingly.
 	s.height = last + 1
 
+	t.log.Info().Uint64("restored_height", last).Msg("indexing resumed")
+
 	// At this point, we should be able to start indexing the chain data for
 	// the next height.
 	s.status = StatusIndex
