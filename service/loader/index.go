@@ -65,6 +65,8 @@ func (i *Index) Trie() (*trie.MTrie, error) {
 		return nil, fmt.Errorf("could not initialize trie: %w", err)
 	}
 
+	i.log.Debug().Msg("starting trie restoration process")
+
 	processed := 0
 	process := func(paths []ledger.Path, payloads []*ledger.Payload) error {
 		var err error
@@ -76,7 +78,7 @@ func (i *Index) Trie() (*trie.MTrie, error) {
 		if err != nil {
 			return fmt.Errorf("could not update trie: %w", err)
 		}
-		processed++
+		processed += len(paths)
 		if processed%10000 == 0 {
 			i.log.Debug().Int("processed", processed).Msg("processing registers for trie restoration")
 		}

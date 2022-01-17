@@ -125,7 +125,7 @@ func run() int {
 			log.Error().Err(err).Msg("could not get index debug data")
 			return failure
 		}
-		fmt.Printf("Index first: %d\nIndex last: %d\n", first, last)
+		fmt.Printf("Index first: %d\nIndex last:  %d\n", first, last)
 	}
 
 	// Read the script.
