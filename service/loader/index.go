@@ -69,6 +69,8 @@ func (i *Index) Trie() (*trie.MTrie, error) {
 
 	processed := 0
 	process := func(paths []ledger.Path, payloads []*ledger.Payload) error {
+		i.log.Debug().Int("paths", len(paths)).Msg("about to process payloads")
+
 		var err error
 		realPayloads := make([]ledger.Payload, len(payloads))
 		for i, p := range payloads {

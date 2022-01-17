@@ -268,7 +268,7 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 
 	prefix := EncodeKey(PrefixPayload)
 	opts := badger.IteratorOptions{
-		PrefetchSize:   100,
+		PrefetchSize:   1000,
 		PrefetchValues: false,
 		Reverse:        true,
 		AllVersions:    false,
@@ -287,8 +287,9 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 		it := tx.NewIterator(opts)
 		defer it.Close()
 
-		payloads := make([]*ledger.Payload, 0, 10000)
-		paths := make([]ledger.Path, 0, 10000)
+		const buffer_size = 10000
+		payloads := make([]*ledger.Payload, 0, buffer_size)
+		paths := make([]ledger.Path, 0, buffer_size)
 
 		sentinel := EncodeKey(PrefixPayload, highest, uint64(math.MaxUint64))
 		for it.Seek(sentinel); it.ValidForPrefix(prefix); {
@@ -322,7 +323,7 @@ func (l *Library) IterateLedger(exclude func(height uint64) bool, process func(p
 			payloads = append(payloads, &payload)
 			paths = append(paths, path)
 
-			if len(payloads) == cap(payloads)-1 {
+			if len(payloads) >= cap(payloads)-1 {
 				// Then, we process the ledger path and payload with the callback.
 				err = process(paths, payloads)
 				if err != nil {
