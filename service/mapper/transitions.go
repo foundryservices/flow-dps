@@ -15,10 +15,8 @@
 package mapper
 
 import (
-	"bufio"
 	"errors"
 	"fmt"
-	"os"
 	"sync"
 	"time"
 
@@ -180,23 +178,6 @@ func (t *Transitions) ResumeIndexing(s *State) error {
 		return fmt.Errorf("could not get last commit: %w", err)
 	}
 	if hash != commit {
-
-		filename := fmt.Sprintf("/data/%x.trie.jsonl", hash)
-
-		fi, err := os.Create(filename)
-		if err != nil {
-			return err
-		}
-		defer fi.Close()
-
-		fileWriter := bufio.NewWriter(fi)
-		defer fileWriter.Flush()
-
-		err = tree.DumpAsJSON(fileWriter)
-		if err != nil {
-			return fmt.Errorf("error while dumping trie: %w", err)
-		}
-
 		return fmt.Errorf("restored trie hash does not match last commit (hash: %x, commit: %x, height: %d)", hash, commit, last)
 	}
 
