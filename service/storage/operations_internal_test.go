@@ -15,7 +15,6 @@
 package storage
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/OneOfOne/xxhash"
@@ -1383,47 +1382,4 @@ func TestLibrary_IterateLedger(t *testing.T) {
 
 		assert.Error(t, err)
 	})
-}
-
-func reduce(path []byte) {
-	for i := len(path) - 1; i >= 0; i-- {
-		path[i] = path[i] - 1
-		if path[i] != 0xff {
-			break
-		}
-	}
-}
-
-func Test_foo(t *testing.T) {
-
-	p1 := []byte{4, 0xff, 0}
-	reduce(p1)
-	fmt.Printf("%v\n", p1)
-
-	key := make([]byte, 50)
-
-	for i := range key {
-		key[i] = byte(i)
-	}
-
-	fmt.Printf("%v\n", key)
-
-	k2 := key[33:41]
-
-	fmt.Printf("%v\n", k2)
-
-	m := make([]*int, 0, 10)
-
-	for i := 0; i < 5; i++ {
-		var b int = i
-
-		m = append(m, &b)
-	}
-
-	fmt.Printf("%d %v\n", cap(m), m)
-
-	m = m[:0]
-
-	fmt.Printf("%d %v\n", cap(m), m)
-
 }
