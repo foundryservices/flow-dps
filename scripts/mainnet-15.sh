@@ -1,4 +1,4 @@
-source common.sh
+source "$(dirname "$0")/common.sh"
 
 live_data "/var/flow" "mainnet-15"  "https://storage.googleapis.com/flow-genesis-bootstrap/mainnet-15-execution" "c8d4c90a40ec74aaf408bd7205d533e8b1901016f54695cbd71e0be4cae8725a"
 

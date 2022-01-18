@@ -1,3 +1,7 @@
+# Versioning
+
+This version `v0.23` is intended to run on `mainnet-15` and `devnet-32`.
+
 # Flow Data Provisioning Service
 
 [![CI Status](https://img.shields.io/github/workflow/status/optakt/flow-dps/MasterCI?logo=GitHub%20Actions&label=&logoColor=silver&labelColor=gray)](https://github.com/optakt/flow-dps/actions/workflows/master.yml)
@@ -38,7 +42,7 @@ value equal to directory name from `cmd/` folder to build appropriate binary int
 
 ### Scripts
 
-`scripts/` folder contains examples how to run DPS for given network, prepare and download the appropriate data
+`scripts/` folder contains examples how to run dockerized DPS for given network, prepare and download appropriate data.
 
 ### APIs
 
