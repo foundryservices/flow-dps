@@ -19,6 +19,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math"
 	"sync/atomic"
 
 	"cloud.google.com/go/storage"
@@ -56,6 +57,7 @@ func NewGCPStreamer(log zerolog.Logger, bucket *storage.BucketHandle, options ..
 
 	decOptions := cbor.DecOptions{
 		ExtraReturnErrors: cbor.ExtraDecErrorUnknownField,
+		MaxArrayElements:  math.MaxUint32,
 	}
 	decoder, err := decOptions.DecMode()
 	if err != nil {
