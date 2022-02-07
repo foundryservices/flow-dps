@@ -51,8 +51,7 @@ func TestFeeder_Update(t *testing.T) {
 			// On the first call, return a Delete operation which should get ignored and skipped.
 			if !recordCalled {
 				recordCalled = true
-				_ = builder.WriteByte(byte(wal.WALDelete))
-				_, _ = builder.Write(update.RootHash[:])
+				_, _ = builder.Write(wal.EncodeDelete(update.RootHash))
 
 				return []byte(builder.String())
 			}

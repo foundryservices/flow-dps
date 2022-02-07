@@ -3,7 +3,7 @@ module github.com/dapperlabs/flow-dps
 go 1.17
 
 require (
-	cloud.google.com/go/storage v1.16.1
+	cloud.google.com/go/storage v1.20.0
 	github.com/OneOfOne/xxhash v1.2.8
 	github.com/dgraph-io/badger/v2 v2.2007.4
 	github.com/dgraph-io/ristretto v0.1.0
@@ -14,10 +14,10 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.2
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/klauspost/compress v1.13.5
-	github.com/onflow/cadence v0.20.2
-	github.com/onflow/flow-go v0.23.3
+	github.com/onflow/cadence v0.21.0
+	github.com/onflow/flow-go v0.24.3
 	github.com/onflow/flow-go-sdk v0.24.0
-	github.com/onflow/flow-go/crypto v0.23.3
+	github.com/onflow/flow-go/crypto v0.24.3
 	github.com/prometheus/client_golang v1.11.0
 	github.com/prometheus/tsdb v0.7.1
 	github.com/rs/zerolog v1.25.0
@@ -25,13 +25,26 @@ require (
 	github.com/srikrsna/protoc-gen-gotag v0.6.1
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	google.golang.org/api v0.58.0
-	google.golang.org/grpc v1.40.0
+	google.golang.org/api v0.66.0
+	google.golang.org/grpc v1.43.0
 	google.golang.org/protobuf v1.27.1
 )
 
 require (
-	cloud.google.com/go v0.97.0 // indirect
+	github.com/cenkalti/backoff v2.2.1+incompatible // indirect
+	github.com/gammazero/workerpool v1.1.2 // indirect
+	github.com/ipfs/go-blockservice v0.2.0 // indirect
+	github.com/ipfs/go-cidutil v0.0.2 // indirect
+	github.com/ipfs/go-fetcher v1.5.0 // indirect
+	github.com/ipfs/go-ipfs-provider v0.7.0 // indirect
+	github.com/ipfs/go-verifcid v0.0.1 // indirect
+)
+
+require (
+	cloud.google.com/go v0.100.2 // indirect
+	cloud.google.com/go/compute v0.1.0 // indirect
+	cloud.google.com/go/iam v0.1.1 // indirect
+	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.9.0 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.5.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.3.0 // indirect
@@ -43,7 +56,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/btcsuite/btcd v0.22.0-beta // indirect
 	github.com/cespare/xxhash v1.1.0 // indirect
-	github.com/cespare/xxhash/v2 v2.1.1 // indirect
+	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/cheekybits/genny v1.0.0 // indirect
 	github.com/cskr/pubsub v1.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
@@ -66,15 +79,15 @@ require (
 	github.com/go-test/deep v1.0.5 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v1.0.0 // indirect
-	github.com/golang/groupcache v0.0.0-20200121045136-8c9f03a8e57e // indirect
+	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.3 // indirect
-	github.com/google/go-cmp v0.5.6 // indirect
+	github.com/google/go-cmp v0.5.7 // indirect
 	github.com/google/gopacket v1.1.19 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/googleapis/gax-go/v2 v2.1.1 // indirect
-	github.com/gorilla/mux v1.7.3 // indirect
+	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.6.0 // indirect
@@ -88,7 +101,7 @@ require (
 	github.com/ipfs/go-bitswap v0.5.0 // indirect
 	github.com/ipfs/go-block-format v0.0.3 // indirect
 	github.com/ipfs/go-cid v0.1.0 // indirect
-	github.com/ipfs/go-datastore v0.5.0 // indirect
+	github.com/ipfs/go-datastore v0.5.1 // indirect
 	github.com/ipfs/go-ipfs-blockstore v1.1.1 // indirect
 	github.com/ipfs/go-ipfs-delay v0.0.1 // indirect
 	github.com/ipfs/go-ipfs-ds-help v1.1.0 // indirect
@@ -97,7 +110,7 @@ require (
 	github.com/ipfs/go-ipfs-util v0.0.2 // indirect
 	github.com/ipfs/go-ipns v0.1.2 // indirect
 	github.com/ipfs/go-log v1.0.5 // indirect
-	github.com/ipfs/go-log/v2 v2.3.0 // indirect
+	github.com/ipfs/go-log/v2 v2.5.0 // indirect
 	github.com/ipfs/go-metrics-interface v0.0.1 // indirect
 	github.com/ipfs/go-peertaskqueue v0.7.0 // indirect
 	github.com/ipld/go-ipld-prime v0.14.1 // indirect
@@ -105,7 +118,6 @@ require (
 	github.com/jbenet/go-temp-err-catcher v0.1.0 // indirect
 	github.com/jbenet/goprocess v0.1.4 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
-	github.com/jrick/bitset v1.0.0 // indirect
 	github.com/kevinburke/go-bindata v3.22.0+incompatible // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/koron/go-ssdp v0.0.2 // indirect
@@ -164,7 +176,7 @@ require (
 	github.com/mikioh/tcpopt v0.0.0-20190314235656-172688c1accc // indirect
 	github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1 // indirect
 	github.com/minio/sha256-simd v1.0.0 // indirect
-	github.com/mitchellh/mapstructure v1.4.1 // indirect
+	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/mr-tron/base58 v1.2.0 // indirect
 	github.com/multiformats/go-base32 v0.0.4 // indirect
 	github.com/multiformats/go-base36 v0.1.0 // indirect
@@ -178,8 +190,8 @@ require (
 	github.com/multiformats/go-varint v0.0.6 // indirect
 	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/onflow/atree v0.1.1 // indirect
-	github.com/onflow/flow-core-contracts/lib/go/contracts v0.7.9 // indirect
-	github.com/onflow/flow-core-contracts/lib/go/templates v0.7.9 // indirect
+	github.com/onflow/flow-core-contracts/lib/go/contracts v0.10.1 // indirect
+	github.com/onflow/flow-core-contracts/lib/go/templates v0.10.1 // indirect
 	github.com/onflow/flow-ft/lib/go/contracts v0.5.0 // indirect
 	github.com/onflow/flow/protobuf/go/flow v0.2.3 // indirect
 	github.com/onsi/ginkgo v1.16.4 // indirect
@@ -194,16 +206,15 @@ require (
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/psiemens/sconfig v0.1.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/rs/cors v0.0.0-20160617231935-a62a804a8a00 // indirect
-	github.com/rs/xhandler v0.0.0-20160618193221-ed27b6fd6521 // indirect
+	github.com/rs/cors v1.8.0 // indirect
 	github.com/sethvargo/go-retry v0.1.0 // indirect
 	github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
-	github.com/spf13/afero v1.6.0 // indirect
+	github.com/spf13/afero v1.8.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect
-	github.com/spf13/cobra v1.2.1 // indirect
+	github.com/spf13/cobra v1.3.0 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/viper v1.8.1 // indirect
+	github.com/spf13/viper v1.10.1 // indirect
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
 	github.com/uber/jaeger-client-go v2.29.1+incompatible // indirect
@@ -223,16 +234,17 @@ require (
 	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871 // indirect
 	golang.org/x/mod v0.5.0 // indirect
 	golang.org/x/net v0.0.0-20211123203042-d83791d6bcd9 // indirect
-	golang.org/x/oauth2 v0.0.0-20210819190943-2bc19b11175f // indirect
-	golang.org/x/sys v0.0.0-20211124211545-fe61309f8881 // indirect
+	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
+	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
 	golang.org/x/text v0.3.7 // indirect
-	golang.org/x/time v0.0.0-20201208040808-7e3f01d25324 // indirect
+	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	golang.org/x/tools v0.1.5 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	gonum.org/v1/gonum v0.8.2 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20211007155348-82e027067bd4 // indirect
+	google.golang.org/genproto v0.0.0-20220201184016-50beb8ab5c44 // indirect
 	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.1.0 // indirect
-	gopkg.in/ini.v1 v1.63.0 // indirect
+	gopkg.in/ini.v1 v1.66.2 // indirect
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
@@ -240,3 +252,5 @@ require (
 )
 
 replace github.com/onflow/flow-go/crypto => ../flow-go/crypto
+
+replace github.com/onflow/flow-go => ../flow-go

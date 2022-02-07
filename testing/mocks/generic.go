@@ -462,7 +462,6 @@ func GenericSeals(number int) []*flow.Seal {
 			FinalState: GenericCommit(i),
 
 			AggregatedApprovalSigs: nil,
-			ServiceEvents:          nil,
 		}
 
 		seals = append(seals, &seal)

@@ -466,7 +466,7 @@ func run() int {
 	// done anymore. Lastly, we stop the mapper logic itself.
 	gsvr.GracefulStop()
 	cancel()
-	<-follow.NodeBuilder.Done()
+	<-follow.Done()
 	err = fsm.Stop()
 	if err != nil {
 		log.Error().Err(err).Msg("could not stop indexer")
