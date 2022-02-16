@@ -4,9 +4,9 @@ RUN apt-get update
 RUN apt-get -y install cmake zip sudo git
 
 ENV FLOW_GO_REPO="https://github.com/onflow/flow-go"
-ENV FLOW_GO_BRANCH=v0.23.3
+ENV FLOW_GO_BRANCH=v0.23.10
 
-RUN mkdir /dps /docker /flow-go
+RUN mkdir /dps /docker
 
 WORKDIR /dps
 
@@ -14,7 +14,7 @@ WORKDIR /dps
 ADD . /dps
 RUN git clone --branch $FLOW_GO_BRANCH $FLOW_GO_REPO /flow-go
 
-RUN ln -s /flow-go /dps/flow-go
+RUN ln -s /dps/flow-go /flow-go
 
 RUN --mount=type=cache,target=/go/pkg/mod \
     --mount=type=cache,target=/root/.cache/go-build  \
