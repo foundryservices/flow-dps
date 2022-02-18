@@ -15,8 +15,6 @@
 package loader
 
 import (
-	"fmt"
-
 	"github.com/dapperlabs/flow-dps/service/mapper"
 )
 
@@ -74,18 +72,12 @@ func ExcludeNone() Exclude {
 // state to avoid processing the root checkpoint registers during restore.
 func ExcludeAtOrBelow(threshold uint64) Exclude {
 	return func(height uint64) bool {
-		if height <= threshold {
-			fmt.Printf("excluding %d treshold %d\n", height, threshold)
-		}
 		return height <= threshold
 	}
 }
 
 func ExcludeOutside(lower, upper uint64) Exclude {
 	return func(height uint64) bool {
-		if height < lower || height > upper {
-			fmt.Printf("excluding %d lower %d upper %d \n", height, lower, upper)
-		}
 		return height < lower || height > upper
 	}
 }
