@@ -35,10 +35,10 @@ function bootstrap() {
   GCP_BUCKET=$(jq .stateArtefacts.gcp.executionStateBucket <<< "$SPORK_DATA")
 
   # this selects random node from the list
-  SEED_NODES_COUNT=$(jq .seedNodes\|length <<< "$SPORK_DATA")
+  SEED_NODES_COUNT=$(jq -r .seedNodes\|length <<< "$SPORK_DATA")
   # shellcheck disable=SC2004
   SELECTED_NODE=$(($RANDOM%SEED_NODES_COUNT))
 
-  SEED_ADDRESS=$(jq .seedNodes[$SELECTED_NODE].address <<< "$SPORK_DATA")
-  SEED_KEY=$(jq .seedNodes[$SELECTED_NODE].key <<< "$SPORK_DATA")
+  SEED_ADDRESS=$(jq -r .seedNodes[$SELECTED_NODE].address <<< "$SPORK_DATA")
+  SEED_KEY=$(jq -r .seedNodes[$SELECTED_NODE].key <<< "$SPORK_DATA")
 }
