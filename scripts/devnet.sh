@@ -1,6 +1,6 @@
 source "$(dirname "$0")/common.sh"
 
-DATA_DIR="/var/flow/dps"
+DATA_DIR="/var/flow/dps/testnet33"
 
 # bootstrap function should set those variables
 
