@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get -y install cmake zip sudo git
 
 ENV FLOW_GO_REPO="https://github.com/onflow/flow-go"
-ENV FLOW_GO_BRANCH=v0.24.6
+ENV FLOW_GO_BRANCH=v0.24.7
 
 RUN mkdir /dps /docker /flow-go
 
