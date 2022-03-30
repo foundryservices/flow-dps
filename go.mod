@@ -15,9 +15,9 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/klauspost/compress v1.13.5
 	github.com/onflow/cadence v0.21.2
-	github.com/onflow/flow-go v0.24.7
+	github.com/onflow/flow-go v0.24.10
 	github.com/onflow/flow-go-sdk v0.24.0
-	github.com/onflow/flow-go/crypto v0.24.3
+	github.com/onflow/flow-go/crypto v0.24.10
 	github.com/prometheus/client_golang v1.11.0
 	github.com/prometheus/tsdb v0.7.1
 	github.com/rs/zerolog v1.25.0
@@ -193,7 +193,7 @@ require (
 	github.com/onflow/flow-core-contracts/lib/go/contracts v0.10.1 // indirect
 	github.com/onflow/flow-core-contracts/lib/go/templates v0.10.1 // indirect
 	github.com/onflow/flow-ft/lib/go/contracts v0.5.0 // indirect
-	github.com/onflow/flow/protobuf/go/flow v0.2.4-0.20220215173423-e60766c65a21 // indirect
+	github.com/onflow/flow/protobuf/go/flow v0.2.4 // indirect
 	github.com/onsi/ginkgo v1.16.4 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
