@@ -44,7 +44,6 @@ require (
 	cloud.google.com/go v0.100.2 // indirect
 	cloud.google.com/go/compute v1.5.0 // indirect
 	cloud.google.com/go/iam v0.3.0 // indirect
-	github.com/HdrHistogram/hdrhistogram-go v1.1.2 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.16.2 // indirect
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.4.1 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/s3/manager v1.11.3 // indirect
@@ -80,7 +79,6 @@ require (
 	github.com/francoispqt/gojay v1.2.13 // indirect
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/fxamacker/circlehash v0.3.0 // indirect
-	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-kit/kit v0.12.0 // indirect
 	github.com/go-kit/log v0.2.0 // indirect
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
@@ -143,7 +141,6 @@ require (
 	github.com/libp2p/go-flow-metrics v0.0.3 // indirect
 	github.com/libp2p/go-libp2p v0.18.0 // indirect
 	github.com/libp2p/go-libp2p-asn-util v0.1.0 // indirect
-	github.com/libp2p/go-libp2p-autonat v0.8.0 // indirect
 	github.com/libp2p/go-libp2p-blankhost v0.3.0 // indirect
 	github.com/libp2p/go-libp2p-core v0.14.0 // indirect
 	github.com/libp2p/go-libp2p-discovery v0.6.0 // indirect
@@ -163,7 +160,6 @@ require (
 	github.com/libp2p/go-libp2p-tls v0.3.1 // indirect
 	github.com/libp2p/go-libp2p-transport-upgrader v0.7.1 // indirect
 	github.com/libp2p/go-libp2p-yamux v0.8.2 // indirect
-	github.com/libp2p/go-maddr-filter v0.1.0 // indirect
 	github.com/libp2p/go-mplex v0.6.0 // indirect
 	github.com/libp2p/go-msgio v0.1.0 // indirect
 	github.com/libp2p/go-nat v0.1.0 // indirect
@@ -171,11 +167,9 @@ require (
 	github.com/libp2p/go-openssl v0.0.7 // indirect
 	github.com/libp2p/go-reuseport v0.1.0 // indirect
 	github.com/libp2p/go-reuseport-transport v0.1.0 // indirect
-	github.com/libp2p/go-sockaddr v0.2.0 // indirect
 	github.com/libp2p/go-stream-muxer-multistream v0.4.0 // indirect
 	github.com/libp2p/go-tcp-transport v0.5.1 // indirect
 	github.com/libp2p/go-ws-transport v0.6.0 // indirect
-	github.com/libp2p/go-yamux/v2 v2.3.0 // indirect
 	github.com/libp2p/go-yamux/v3 v3.0.2 // indirect
 	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/lucas-clemente/quic-go v0.27.0 // indirect
@@ -206,6 +200,7 @@ require (
 	github.com/multiformats/go-varint v0.0.6 // indirect
 	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/onflow/atree v0.3.0 // indirect
+	github.com/onflow/flow v0.2.4 // indirect
 	github.com/onflow/flow-core-contracts/lib/go/contracts v0.11.0 // indirect
 	github.com/onflow/flow-core-contracts/lib/go/templates v0.11.0 // indirect
 	github.com/onflow/flow-ft/lib/go/contracts v0.5.0 // indirect
@@ -225,7 +220,7 @@ require (
 	github.com/psiemens/sconfig v0.1.0 // indirect
 	github.com/raulk/clock v1.1.0 // indirect
 	github.com/raulk/go-watchdog v1.2.0 // indirect
-	github.com/rivo/uniseg v0.2.0 // indirect
+	github.com/rivo/uniseg v0.2.1-0.20211004051800-57c86be7915a // indirect
 	github.com/rs/cors v1.8.2 // indirect
 	github.com/sethvargo/go-retry v0.2.3 // indirect
 	github.com/spacemonkeygo/spacelog v0.0.0-20180420211403-2296661a0572 // indirect
