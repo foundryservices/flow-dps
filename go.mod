@@ -15,9 +15,9 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/klauspost/compress v1.13.5
 	github.com/onflow/cadence v0.21.2
-	github.com/onflow/flow-go v0.24.10
+	github.com/onflow/flow-go v0.25.7
 	github.com/onflow/flow-go-sdk v0.24.0
-	github.com/onflow/flow-go/crypto v0.24.10
+	github.com/onflow/flow-go/crypto v0.25.7
 	github.com/prometheus/client_golang v1.11.0
 	github.com/prometheus/tsdb v0.7.1
 	github.com/rs/zerolog v1.25.0
