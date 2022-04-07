@@ -23,7 +23,7 @@ require (
 	github.com/rs/zerolog v1.26.1
 	github.com/spf13/pflag v1.0.5
 	github.com/srikrsna/protoc-gen-gotag v0.6.2
-	github.com/stretchr/testify v1.7.1
+	github.com/stretchr/testify v1.7.1-0.20210824115523-ab6dc3262822
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	google.golang.org/api v0.74.0
 	google.golang.org/grpc v1.45.0
