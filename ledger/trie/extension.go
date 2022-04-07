@@ -75,7 +75,7 @@ func (e *Extension) computeHash(sema *semaphore.Weighted, height int) hash.Hash 
 	hash := e.child.Hash(sema, height-int(e.count)-1)
 	for i := height - int(e.count); i <= height; i++ {
 		empty := ledger.GetDefaultHashForHeight(i)
-		if bitutils.Bit(e.path[:], 255-i) == 0 {
+		if bitutils.ReadBit(e.path[:], 255-i) == 0 {
 			hash = trie.HashInterNode(hash, empty)
 		} else {
 			hash = trie.HashInterNode(empty, hash)

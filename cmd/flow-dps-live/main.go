@@ -427,7 +427,7 @@ func run() int {
 				// Cancel the context given to the consensus follower.
 				cancel()
 				// Wait for it to have stopped gracefully.
-				<-follow.NodeBuilder.Done()
+				// <-follow.NodeBuilder.Done()
 			},
 		).
 		Component(

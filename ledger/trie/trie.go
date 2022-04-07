@@ -160,7 +160,7 @@ func (t *Trie) Mutate(paths []ledger.Path, payloads []ledger.Payload) (*Trie, er
 		// or one, and get one set of paths on the left and one on the right.
 		var pivot uint
 		for pivot = group.start; pivot < group.end; pivot++ {
-			bit := bitutils.Bit(paths[pivot][:], int(group.depth))
+			bit := bitutils.ReadBit(paths[pivot][:], int(group.depth))
 			if bit == 1 {
 				break
 			}
@@ -240,7 +240,7 @@ func (t *Trie) Mutate(paths []ledger.Path, payloads []ledger.Payload) (*Trie, er
 
 				// If we are going in the same direction to the left or the right
 				// with all of our paths, simply clone the source extension.
-				extBit := bitutils.Bit(n.path[:], int(group.depth))
+				extBit := bitutils.ReadBit(n.path[:], int(group.depth))
 				if (extBit == 0 && pivot == group.end) ||
 					(extBit == 1 && pivot == group.start) {
 
@@ -328,7 +328,7 @@ func (t *Trie) Mutate(paths []ledger.Path, payloads []ledger.Payload) (*Trie, er
 		n, ok := (*group.target.node).(*Extension)
 		if ok && group.target.count > 0 {
 
-			extBit := bitutils.Bit(n.path[:], int(group.depth))
+			extBit := bitutils.ReadBit(n.path[:], int(group.depth))
 
 			// If the extension points left and the group only has left-bound elements,
 			// or it points right and the group only has right-bound elements, or the
@@ -527,7 +527,7 @@ func (t *Trie) Mutate(paths []ledger.Path, payloads []ledger.Payload) (*Trie, er
 					case *Extension:
 						// If the source was an extension that we split, we need keep track of it to avoid
 						// losing its child.
-						if bitutils.Bit(s.path[:], int(group.depth-1)) == 0 {
+						if bitutils.ReadBit(s.path[:], int(group.depth-1)) == 0 {
 							if group.source.count == s.count {
 								group.source.node = &s.child
 								group.source.count = 0
@@ -596,7 +596,7 @@ func (t *Trie) read(path ledger.Path) (*ledger.Payload, error) {
 		case *Branch:
 
 			// A zero bit goes left, a one bit goes right.
-			if bitutils.Bit(path[:], int(depth)) == 0 {
+			if bitutils.ReadBit(path[:], int(depth)) == 0 {
 				current = &node.left
 			} else {
 				current = &node.right
@@ -614,8 +614,8 @@ func (t *Trie) read(path ledger.Path) (*ledger.Payload, error) {
 			// We simply mimic the earlier code here, so we can use the same
 			// semantics of a zero-based `common` count. If we mismatch on the
 			// first bit, the path is not in our trie.
-			insertionBit := bitutils.Bit(path[:], int(depth))
-			extensionBit := bitutils.Bit(node.path[:], int(depth))
+			insertionBit := bitutils.ReadBit(path[:], int(depth))
+			extensionBit := bitutils.ReadBit(node.path[:], int(depth))
 			if insertionBit != extensionBit {
 				return nil, ErrPathNotFound
 			}
@@ -626,7 +626,7 @@ func (t *Trie) read(path ledger.Path) (*ledger.Payload, error) {
 			// one bit of difference.
 			common := uint8(0)
 			for i := depth + 1; i != 0 && i <= depth+node.count; i++ {
-				if bitutils.Bit(path[:], int(i)) != bitutils.Bit(node.path[:], int(i)) {
+				if bitutils.ReadBit(path[:], int(i)) != bitutils.ReadBit(node.path[:], int(i)) {
 					break
 				}
 				common++
