@@ -232,6 +232,7 @@ require (
 	github.com/nxadm/tail v1.4.8 // indirect
 	github.com/oklog/ulid v1.3.1 // indirect
 	github.com/onflow/atree v0.3.0 // indirect
+	github.com/onflow/flow v0.2.4 // indirect
 	github.com/onflow/flow-core-contracts/lib/go/contracts v0.11.0 // indirect
 	github.com/onflow/flow-core-contracts/lib/go/templates v0.11.0 // indirect
 	github.com/onflow/flow-ft/lib/go/contracts v0.5.0 // indirect
