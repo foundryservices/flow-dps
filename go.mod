@@ -203,7 +203,7 @@ require (
 	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/lucas-clemente/quic-go v0.27.0 // indirect
 	github.com/lyft/protoc-gen-star v0.5.3 // indirect
-	github.com/m4ksio/wal v1.8.2 // indirect
+	github.com/m4ksio/wal v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/marten-seemann/qtls-go1-16 v0.1.5 // indirect
 	github.com/marten-seemann/qtls-go1-17 v0.1.1 // indirect
